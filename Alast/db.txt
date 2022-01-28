@@ -1,0 +1,11 @@
+
+	cursor = conn.cursor()
+	cursor.execute("CREATE TABLE Users(user_id SERIAL PRIMARY KEY,email VARCHAR(255),username VARCHAR(255),salt VARCHAR(255),hashed VARCHAR(255),conform_mail VARCHAR(255),password_mail VARCHAR(255),created_on TIMESTAMP)")
+	conn.commit()
+	cursor.close()
+
+
+	cursor = conn.cursor()
+	q = "INSERT INTO users (email,username,salt,hashed,created_on) VALUES (  'temp@gmail.com',  'temp',  '$2b$12$SaF9BPqn2RiWKRQBQQTuEe',  '$2b$12$SaF9BPqn2RiWKRQBQQTuEe5Z0zNrR6fEgCZnblQ1xfwywuIbIdBtO',current_timestamp); "
+	cursor.execute(q)
+	conn.commit()

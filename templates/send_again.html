@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>link has expired</h1>
+    <h3>send again</h3>
+    <form action="/send_again" method="post">
+        <input type="hidden" name="confirm" value="{{confirm}}">
+        <input type="hidden" name="token" value="{{token}}">
+        <input type="submit" value="send again">
+    </form>
+</body>
+
+</html>
