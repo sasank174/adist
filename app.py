@@ -52,7 +52,8 @@ def home():
 	if not db_connection:
 		return "<h1>error in connection to db try later<h1>"	
 	if "user" in session:
-		return render_template("index.html",user = session["user"])
+		#  D S M B
+		return render_template("index.html",user = session["user"],ab = session["user"])
 	else:
 		return redirect("/signin")
 
@@ -372,6 +373,25 @@ def profile():
 			return redirect("/signin")
 			
 
+# =============================================================================================================
+@app.route("/ad", methods = ['POST', 'GET'])
+def ad():
+	if request.method == 'GET':
+		if 'user' in session:
+			return render_template("ad.html")
+		else:
+			flash('please login first')
+			return redirect("/signin")
+	if request.method == 'POST':
+		if 'user' in session:
+			print("=========================================================================")
+			values = request.form.to_dict()
+			print(values['type'])
+			print(type(values['type']))
+			return "http://127.0.0.1:8000/profile"
+		else:
+			flash('please login first')
+			return redirect("/signin")
 # =============================================================================================================
 @app.route("/logout")
 def logout():

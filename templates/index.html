@@ -49,42 +49,42 @@
             <div class="box">
                 <p>Earn: n points</p>
                 <p>Ad duration: 30 Sec</p>
-                <button>Watch now</button>
+                <button onclick="cli(1);">Watch now</button>
             </div>
             <div class="box">
                 <p>Earn: n points</p>
                 <p>Ad duration: 30 Sec</p>
-                <button>Watch now</button>
+                <button onclick="cli(1);">Watch now</button>
             </div>
             <div class="box">
                 <p>Earn: n points</p>
                 <p>Ad duration: 30 Sec</p>
-                <button>Watch now</button>
+                <button onclick="cli(1);">Watch now</button>
             </div>
             <div class="box">
                 <p>Earn: n points</p>
                 <p>Ad duration: 30 Sec</p>
-                <button>Watch now</button>
+                <button onclick="cli(1);">Watch now</button>
             </div>
             <div class="box">
                 <p>Earn: n points</p>
                 <p>Ad duration: 30 Sec</p>
-                <button>Watch now</button>
+                <button onclick="cli(1);">Watch now</button>
             </div>
             <div class="box">
                 <p>Earn: n points</p>
                 <p>Ad duration: 30 Sec</p>
-                <button>Watch now</button>
+                <button onclick="cli(1);">Watch now</button>
             </div>
             <div class="box">
                 <p>Earn: n points</p>
                 <p>Ad duration: 30 Sec</p>
-                <button>Watch now</button>
+                <button onclick="cli(1);">Watch now</button>
             </div>
             <div class="box">
                 <p>Earn: n points</p>
                 <p>Ad duration: 30 Sec</p>
-                <button>Watch now</button>
+                <button onclick="cli(1);">Watch now</button>
             </div>
         </div>
         <div class="block">
@@ -92,22 +92,22 @@
             <div class="box">
                 <p>Earn: n points</p>
                 <p>Ad duration: 60 Sec</p>
-                <button>Watch now</button>
+                <button onclick="cli(2);">Watch now</button>
             </div>
             <div class="box">
                 <p>Earn: n points</p>
                 <p>Ad duration: 60 Sec</p>
-                <button>Watch now</button>
+                <button onclick="cli(2);">Watch now</button>
             </div>
             <div class="box">
                 <p>Earn: n points</p>
                 <p>Ad duration: 60 Sec</p>
-                <button>Watch now</button>
+                <button onclick="cli(2);">Watch now</button>
             </div>
             <div class="box">
                 <p>Earn: n points</p>
                 <p>Ad duration: 60 Sec</p>
-                <button>Watch now</button>
+                <button onclick="cli(2);">Watch now</button>
             </div>
         </div>
         <div class="block">
@@ -115,22 +115,22 @@
             <div class="box">
                 <p>Earn: n points</p>
                 <p>Ad duration: 15 Sec</p>
-                <button>Watch now</button>
+                <button onclick="cli(3);">Watch now</button>
             </div>
             <div class="box">
                 <p>Earn: n points</p>
                 <p>Ad duration: 15 Sec</p>
-                <button>Watch now</button>
+                <button onclick="cli(3);">Watch now</button>
             </div>
             <div class="box">
                 <p>Earn: n points</p>
                 <p>Ad duration: 15 Sec</p>
-                <button>Watch now</button>
+                <button onclick="cli(3);">Watch now</button>
             </div>
             <div class="box">
                 <p>Earn: n points</p>
                 <p>Ad duration: 15 Sec</p>
-                <button>Watch now</button>
+                <button onclick="cli(3);">Watch now</button>
             </div>
         </div>
         <div class="block">
@@ -138,25 +138,48 @@
             <div class="box">
                 <p>Earn: n points</p>
                 <p>Ad duration: 30 Sec</p>
-                <button>Watch now</button>
+                <button onclick="cli(4);">Watch now</button>
             </div>
             <div class="box">
                 <p>Earn: n points</p>
                 <p>Ad duration: 30 Sec</p>
-                <button>Watch now</button>
+                <button onclick="cli(4);">Watch now</button>
             </div>
             <div class="box">
                 <p>Earn: n points</p>
                 <p>Ad duration: 30 Sec</p>
-                <button>Watch now</button>
+                <button onclick="cli(4);">Watch now</button>
             </div>
             <div class="box">
                 <p>Earn: n points</p>
                 <p>Ad duration: 30 Sec</p>
-                <button>Watch now</button>
+                <button onclick="cli(4);">Watch now</button>
             </div>
         </div>
     </section>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        function cli(type) {
+            $(document).ready(function () {
+                $.post("ad", {
+                        type: type.toString()
+                    },
+                    function (data, status) {
+                        if (status == "success") {
+                            var win = window.open(data, '_blank');
+                            if (win) {
+                                win.focus();
+                            } else {
+                                alert('Please allow popups for this website');
+                            }
+                        }
+                    });
+
+            });
+        }
+    </script>
 
 </body>
 
