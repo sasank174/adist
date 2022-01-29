@@ -409,7 +409,7 @@ def adview(token):
 			if len(result) == 1:
 				result = result[0]
 				print()
-				return render_template("adview.html",duration = duration)
+				return render_template("adview.html")
 			elif len(result) == 0:
 				flash('invalid login')
 				return redirect("/")
