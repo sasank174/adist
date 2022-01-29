@@ -377,21 +377,49 @@ def profile():
 @app.route("/ad", methods = ['POST', 'GET'])
 def ad():
 	if request.method == 'GET':
-		if 'user' in session:
-			return render_template("ad.html")
-		else:
-			flash('please login first')
-			return redirect("/signin")
+		return redirect("/")
 	if request.method == 'POST':
 		if 'user' in session:
-			print("=========================================================================")
 			values = request.form.to_dict()
-			print(values['type'])
-			print(type(values['type']))
-			return "http://127.0.0.1:8000/profile"
+			v = values['v']
+			if v == "1":
+				duration = '30'
+			elif v == "2":
+				duration = '60'
+			elif v == "3":
+				duration = '15'
+			elif v == "4":
+				duration = '30'
+			else:
+				flash('invalid type')
+				return redirect("/")
+			token = tokens.adcreate([duration,session['user'][1]])
+			return "http://127.0.0.1:8000/adview/{}".format(token)
 		else:
 			flash('please login first')
 			return redirect("/signin")
+# =============================================================================================================
+@app.route("/adview/<token>", methods = ['POST', 'GET'])
+def adview(token):
+	if request.method == 'GET':
+		if 'user' in session:
+			duration,email = tokens.advalidate(token)
+			q = "SELECT email FROM users WHERE email = '{}'".format(email)
+			result = db.select(q)
+			if len(result) == 1:
+				result = result[0]
+				print()
+				return render_template("adview.html",duration = duration)
+			elif len(result) == 0:
+				flash('invalid login')
+				return redirect("/")
+			else:
+				flash('internal error')
+				return redirect("/")
+	if request.method == 'POST':
+		flash('invalid request')
+		return redirect("/")
+
 # =============================================================================================================
 @app.route("/logout")
 def logout():

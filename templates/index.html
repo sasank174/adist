@@ -161,10 +161,10 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
-        function cli(type) {
+        function cli(v) {
             $(document).ready(function () {
                 $.post("ad", {
-                        type: type.toString()
+                        v: v.toString()
                     },
                     function (data, status) {
                         if (status == "success") {

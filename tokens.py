@@ -28,3 +28,17 @@ def get(inp,salt):
     except BadTimeSignature:
         return "invalid"
     return value
+
+# ============================================================
+def adcreate(inp):
+    token = s.dumps(inp, salt="ad-unit")
+    return token
+
+def advalidate(inp):
+    try:
+        value = s.loads(inp, salt="ad-unit", max_age=120) # 120 seconds = 2 minutes
+        return value
+    except SignatureExpired:
+        return "expired"
+    except BadTimeSignature:
+        return "invalid"
