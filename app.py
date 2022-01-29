@@ -52,8 +52,7 @@ def home():
 	if not db_connection:
 		return "<h1>error in connection to db try later<h1>"	
 	if "user" in session:
-		result = db.select("SELECT * from users")
-		return render_template("index.html",data = result,user = session["user"])
+		return render_template("index.html",user = session["user"])
 	else:
 		return redirect("/signin")
 
@@ -245,25 +244,23 @@ def password_change():
 	if request.method == 'POST':
 		values = request.form.to_dict()
 		email = values["email"]
-		oldpassword = values["oldpassword"]
-		newpassword = values["newpassword"]
+		password = values["password"]
 
-		if oldpassword == newpassword:
-			flash('new password can not be same as old password')
-			return redirect("/passwordchange")
-		
 		result = db.select("SELECT email,username,hashed,conform_mail FROM users WHERE email = '{}'".format(email))
 		if len(result) == 1:
 			result = result[0]
 			email,username,hashed,conform_mail = result[0],result[1],result[2],result[3]
 			if conform_mail == "#":
-				if encrypt.validate(oldpassword,hashed):
-					salt,hashed = encrypt.create(newpassword)
+				if encrypt.validate(password,hashed):
+					flash("old and new passwords cannot be same")
+					return redirect("/passwordchange")
+				else:
+					salt,hashed = encrypt.create(password)
 					token = tokens.create([email,username,salt,hashed],'password-reset')
 					if mailing(email,username,token,2):
-						q = "UPDATE users SET password_mail = '{}' WHERE email = '{}'".format(token,email)
+						q = "UPDATE users SET password_mail = '{}' WHERE username = '{}'".format(token,username)
 						if db.insert(q):
-							flash('please confirm your mail to change password')
+							flash('verify mail')
 							return redirect("/passwordchange")
 						else:
 							flash('error in db')
@@ -271,9 +268,6 @@ def password_change():
 					else:
 						flash('error in sending mail')
 						return redirect("/passwordchange")
-				else:
-					flash('wrong password')
-					return redirect("/passwordchange")
 			else:
 				flash('please confirm your mail to make changes')
 				return redirect("/passwordchange")
@@ -306,7 +300,7 @@ def reset_password(token):
 					flash('error in db')
 					return redirect("/signin")
 			elif result[0] == "#":
-				flash('link expired')
+				flash('link expired or already updated')
 				return redirect("/signin")
 			else:
 				flash('invalid token')
@@ -340,25 +334,15 @@ def reset_password(token):
 			return redirect("/signin")
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 # =============================================================================================================
 @app.route("/logout")
 def logout():
 	session.clear()
 	return redirect("/")
+
+@app.route("/future")
+def future():
+	return "These will be implemented in future future"
 
 @app.errorhandler(404)
 def page_not_found(e):
