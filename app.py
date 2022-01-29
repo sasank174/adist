@@ -403,13 +403,19 @@ def ad():
 def adview(token):
 	if request.method == 'GET':
 		if 'user' in session:
-			duration,email = tokens.advalidate(token)
+			result = tokens.advalidate(token)
+			if result == "invalid" or result == "expired":
+				flash('invalid ad')
+				return redirect("/")
+			else:
+				duration,email = result
 			q = "SELECT email FROM users WHERE email = '{}'".format(email)
 			result = db.select(q)
 			if len(result) == 1:
 				result = result[0]
-				print()
-				return render_template("adview.html")
+				print(duration)
+				print(type(duration))
+				return render_template("adview.html",duration = duration)
 			elif len(result) == 0:
 				flash('invalid login')
 				return redirect("/")
