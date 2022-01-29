@@ -335,6 +335,44 @@ def reset_password(token):
 
 
 # =============================================================================================================
+@app.route("/profile", methods = ['POST', 'GET'])
+def profile():
+	if request.method == 'GET':
+		if 'user' in session:
+			q = "SELECT username,email FROM users WHERE email = '{}'".format(session['user'][1])
+			result = db.select(q)
+			if len(result) == 1:
+				result = result[0]
+				username,email = result[0],result[1]
+				return render_template("profile.html",username = username,email = email)
+			elif len(result) == 0:
+				flash('invalid login')
+				return redirect("/signin")
+			else:
+				flash('internal error')
+				return redirect("/signin")
+		else:
+			flash('please login first')
+			return redirect("/signin")
+	if request.method == 'POST':
+		if 'user' in session:
+			values = request.form.to_dict()
+			password = values["password"]
+			email = session['user'][1]
+			salt,hashed = encrypt.create(password)
+			q = "UPDATE users SET salt = '{}',hashed = '{}' WHERE email = '{}'".format(salt,hashed,email)
+			if db.insert(q):
+				flash('password updated')
+				return redirect("/profile")
+			else:
+				flash('error in db')
+				return redirect("/profile")
+		else:
+			flash('please login first')
+			return redirect("/signin")
+			
+
+# =============================================================================================================
 @app.route("/logout")
 def logout():
 	session.clear()

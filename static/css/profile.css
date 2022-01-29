@@ -83,7 +83,8 @@ header>h1::after {
 header i {
     margin-right: 10px;
 }
-header h3{
+
+header h3 {
     text-decoration: underline;
 }
 header h4{
@@ -189,8 +190,8 @@ header .logout {
     background: rgba(146, 32, 32, 0.5);
     padding: 10px;
     box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
+    /* backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px); */
     border-radius: 10px;
     border: 1px solid rgba(255, 255, 255, 0.18);
 }
@@ -205,98 +206,60 @@ section {
     margin-top: 50px;
 }
 
-
-.block {
-    margin: 10px auto;
-    width: calc(100% - 100px);
-    padding: 20px;
-    background: rgba(255, 255, 255, 0.25);
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-    backdrop-filter: blur(2px);
-    border-radius: 10px;
-    border: 1px solid rgba(255, 255, 255, 0.18);
-    padding-top: 80px;
+.info {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
-}
-
-.block>h1 {
-    position: absolute;
-    top: 10px;
-    height: 50px;
-    left: -15px;
-    border-radius: 30px;
-    background: #130f40;
-    border-bottom-left-radius: 0;
-    font-size: 25px;
-    padding: 10px;
-    padding-left: 0;
-
-    font-weight: bold;
-    color: white;
-}
-
-.block>h1::before {
-    content: '';
-    position: absolute;
-    top: 50px;
-    width: 15px;
-    height: 30px;
-    background: #30336b;
-    border-top-left-radius: 20px;
-    border-bottom-left-radius: 20px;
-    z-index: 2;
-}
-
-.block>h1::after {
-    content: '';
-    position: absolute;
-    top: 50px;
-    left: 0;
-    width: 15px;
-    height: 15px;
-    background: #130f40;
-    z-index: 1;
-}
-
-
-.block .box {
-    text-align: center;
-    min-width: 250px;
-    padding: 10px;
-    border-radius: 20px;
-    margin: 10px;
-    background: white;
+    position: relative;
+    width: 50%;
+    margin: 0 auto;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.25);
     box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
     border-radius: 10px;
     border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
-.block .box p {
-    font-weight: 700;
-    margin: 0;
+.info .i{
+    display:inline;
+    position: relative;
 }
 
-.block .box button {
-    font-weight: 500;
-    width: 100%;
-    color: black;
-    padding: 5px 15px;
+.info .i label{
+    position: absolute;
+    top: -20px;
+    left: 0;
+}
+
+.info .i input {
+    padding: 12px 20px;
     margin: 8px 0;
-    cursor: pointer;
-    background: rgba(22, 160, 133, 0.25);
+    display: inline-block;
+    border: 1px solid #ccc;
+    border: none;
+    background: white;
+    color: black;
+    border-radius: 10px;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+
+.info p{
+    text-align: center;
+    font-size: 18px;
+}
+
+
+.payment {
+    text-align: center;
+    position: relative;
+    width: 50%;
+    margin: 0 auto;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
     border-radius: 10px;
     border: 1px solid rgba(255, 255, 255, 0.18);
-    transition: 1s all;
-}
-
-
-.block .box button:hover {
-    background: rgba(180, 170, 170, 0.25);
-    /* font-size: 18px; */
-    box-shadow: none;
-    font-weight: 900;
-    letter-spacing: 1px;
-    /* padding: 5px 15px; */
+    margin-top: 20px;
 }

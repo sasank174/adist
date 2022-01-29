@@ -10,27 +10,151 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
     </script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+        integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ url_for('static',filename='css/index.css') }}">
     <title>ADIST || HOME</title>
 </head>
 
 <body>
-    <h1>ADIST</h1>
-    <h3>{{user}}</h3>
-    <a href="/logout">logout</a>
-    <section>
-        <div class="details">
-            <p>Username: {{user[1]}}</p>
-            <p>earned: <a href="/future">here</a></p>
+    <header>
+        <h1><span>A</span>dist</h1>
+        <div class="right">
+            <div class="dropdown">
+                <h4><i class="fas fa-dollar-sign"></i> 0.00</h4>
+                <button class="dropbtn">
+                    <h3>{{user[0]}}</h3>
+                </button>
+                <div class="dropdown-content">
+                    <a href="/profile"><i class="fas fa-user"></i> Profile</a>
+                    <a href="/future"><i class="fas fa-money-check-alt"></i> Payment</a>
+                    <a href="/future"><i class="fas fa-users"></i> referal</a>
+                    <a href="/future"><i class="fas fa-external-link-alt"></i> Earnings</a>
+                </div>
+            </div>
+            <a class="logout" href="/logout"><i class="fas fa-sign-out-alt"></i></a>
         </div>
-
+    </header>
+    <div class="about">
+        <h3>Watch ads and earn cash </h3>
+        <div class="note">
+            <h5 style="text-align:left">NOTE:</h5>
+            <p>As of now payment process is still under construction</p>
+            <p>earnings will start only after construction of payment gateway</p>
+        </div>
+    </div>
+    <section>
         <div class="block">
-            <div class="box">sada</div>
-            <div class="box">sada</div>
-            <div class="box">sada</div>
-            <div class="box">sada</div>
-            <div class="box">sada</div>
-            <div class="box">sada</div>
+            <h1>&nbsp;&nbsp;&nbsp;&nbsp;Daily ads</h1>
+            <div class="box">
+                <p>Earn: n points</p>
+                <p>Ad duration: 30 Sec</p>
+                <button>Watch now</button>
+            </div>
+            <div class="box">
+                <p>Earn: n points</p>
+                <p>Ad duration: 30 Sec</p>
+                <button>Watch now</button>
+            </div>
+            <div class="box">
+                <p>Earn: n points</p>
+                <p>Ad duration: 30 Sec</p>
+                <button>Watch now</button>
+            </div>
+            <div class="box">
+                <p>Earn: n points</p>
+                <p>Ad duration: 30 Sec</p>
+                <button>Watch now</button>
+            </div>
+            <div class="box">
+                <p>Earn: n points</p>
+                <p>Ad duration: 30 Sec</p>
+                <button>Watch now</button>
+            </div>
+            <div class="box">
+                <p>Earn: n points</p>
+                <p>Ad duration: 30 Sec</p>
+                <button>Watch now</button>
+            </div>
+            <div class="box">
+                <p>Earn: n points</p>
+                <p>Ad duration: 30 Sec</p>
+                <button>Watch now</button>
+            </div>
+            <div class="box">
+                <p>Earn: n points</p>
+                <p>Ad duration: 30 Sec</p>
+                <button>Watch now</button>
+            </div>
+        </div>
+        <div class="block">
+            <h1>&nbsp;&nbsp;&nbsp;&nbsp;Standard ads</h1>
+            <div class="box">
+                <p>Earn: n points</p>
+                <p>Ad duration: 60 Sec</p>
+                <button>Watch now</button>
+            </div>
+            <div class="box">
+                <p>Earn: n points</p>
+                <p>Ad duration: 60 Sec</p>
+                <button>Watch now</button>
+            </div>
+            <div class="box">
+                <p>Earn: n points</p>
+                <p>Ad duration: 60 Sec</p>
+                <button>Watch now</button>
+            </div>
+            <div class="box">
+                <p>Earn: n points</p>
+                <p>Ad duration: 60 Sec</p>
+                <button>Watch now</button>
+            </div>
+        </div>
+        <div class="block">
+            <h1>&nbsp;&nbsp;&nbsp;&nbsp;Micro ads</h1>
+            <div class="box">
+                <p>Earn: n points</p>
+                <p>Ad duration: 15 Sec</p>
+                <button>Watch now</button>
+            </div>
+            <div class="box">
+                <p>Earn: n points</p>
+                <p>Ad duration: 15 Sec</p>
+                <button>Watch now</button>
+            </div>
+            <div class="box">
+                <p>Earn: n points</p>
+                <p>Ad duration: 15 Sec</p>
+                <button>Watch now</button>
+            </div>
+            <div class="box">
+                <p>Earn: n points</p>
+                <p>Ad duration: 15 Sec</p>
+                <button>Watch now</button>
+            </div>
+        </div>
+        <div class="block">
+            <h1>&nbsp;&nbsp;&nbsp;&nbsp;Bonus ads</h1>
+            <div class="box">
+                <p>Earn: n points</p>
+                <p>Ad duration: 30 Sec</p>
+                <button>Watch now</button>
+            </div>
+            <div class="box">
+                <p>Earn: n points</p>
+                <p>Ad duration: 30 Sec</p>
+                <button>Watch now</button>
+            </div>
+            <div class="box">
+                <p>Earn: n points</p>
+                <p>Ad duration: 30 Sec</p>
+                <button>Watch now</button>
+            </div>
+            <div class="box">
+                <p>Earn: n points</p>
+                <p>Ad duration: 30 Sec</p>
+                <button>Watch now</button>
+            </div>
         </div>
     </section>
 
