@@ -1,4 +1,3 @@
-import email
 from flask import Flask, flash, redirect, render_template, session, request
 from flask_mail import Mail, Message
 import db

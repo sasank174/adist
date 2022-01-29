@@ -1,4 +1,5 @@
 * {
+    overflow: hidden;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -219,4 +220,25 @@ header .logout {
         width: 100%;
         background: #0F0;
     }
+}
+
+
+
+
+
+.all {
+    width: 100%;
+    height: 100%;
+}
+
+.all .right {
+    position: fixed;
+    right: 0;
+    top: 50px;
+}
+
+.a {
+    position: fixed;
+    bottom: 50px;
+    left: 50%;
 }
