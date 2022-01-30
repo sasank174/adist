@@ -465,7 +465,7 @@ def adviewpoast():
 				result = db.select(q)
 				if len(result) == 1:
 					result = result[0]
-					points = str(int(result[1]) + int(p))
+					points = str(float(result[1]) + float(p))
 					q = "UPDATE users SET points = '{}' WHERE email = '{}'".format(points,session['user'][1])
 					if db.insert(q):
 						flash('points added')
