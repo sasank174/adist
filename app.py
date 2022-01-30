@@ -11,13 +11,13 @@ import os
 
 app = Flask(__name__)
 mail= Mail(app)
-app.secret_key = "sasank"
+app.secret_key = os.getenv('SECRET_KEY')
 recaptcha = ReCaptcha(app=app)
 
 app.config.update(dict(
     RECAPTCHA_ENABLED = True,
-    RECAPTCHA_SITE_KEY = "6Ld2lkceAAAAANmiOuXdRol2ha7Dj1pNgKUPcRI8",
-    RECAPTCHA_SECRET_KEY = "6Ld2lkceAAAAALyPvDB7jVWcz19bsILukMC_1iEd",
+    RECAPTCHA_SITE_KEY = os.getenv('RECAPTCHA_SITE_KEY'),
+    RECAPTCHA_SECRET_KEY = os.getenv('RECAPTCHA_SECRET_KEY'),
 ))
 
 recaptcha = ReCaptcha()
@@ -36,12 +36,12 @@ def mailing(tomail,username,token,no):
 	try:
 		app.config['MAIL_SERVER']='smtp.gmail.com'
 		app.config['MAIL_PORT'] = 465
-		app.config['MAIL_USERNAME'] = 'manamwhy@gmail.com'
-		app.config['MAIL_PASSWORD'] = 'dobeyraaa'
+		app.config['MAIL_USERNAME'] = os.getenv('EMAIL')
+		app.config['MAIL_PASSWORD'] = os.getenv('PASSWORD')
 		app.config['MAIL_USE_TLS'] = False
 		app.config['MAIL_USE_SSL'] = True
 		mail = Mail(app)
-		msg = Message('Hello', sender = 'manamwhy@gmail.com', recipients = [tomail])
+		msg = Message('Hello', sender = os.getenv('EMAIL'), recipients = [tomail])
 		msg.body = "<h1>Hello Flask message sent from Flask-Mail</h1>"
 		msg.subject = x
 		link = "https://adist.herokuapp.com/{}/{}".format(y,token)
@@ -64,7 +64,6 @@ def mailing(tomail,username,token,no):
 @app.route("/")
 @app.route("/home")
 def home():
-	return "hello, {}".format(os.getenv('NAME'))
 	if not db_connection:
 		return "<h1>error in connection to db try later<h1>"	
 	if "user" in session:
