@@ -23,6 +23,5 @@ def select(query):
 def insert(query):
     cur = conn.cursor()
     cur.execute(query)
-    # cur.commit()
     cur.close()
     return True

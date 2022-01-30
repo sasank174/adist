@@ -450,8 +450,6 @@ def adviewpoast():
 				values = request.form.to_dict()
 				duration = values['duration']
 				p=0
-				flash(duration)
-				flash(type(duration))
 				if duration == "15":
 					p = 0.5
 				elif duration == "30":
