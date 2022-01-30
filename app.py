@@ -447,38 +447,37 @@ def adviewpoast():
 		return redirect("/")
 	if request.method == 'POST':
 		if 'user' in session:
-			values = request.form.to_dict()
-			duration = values['duration']
-			if duration == "15":
-				p = 0.5
-			if duration == "30":
-				p = 1
-			if duration == "60":
-				p = 2
-			else:
-				flash('invalid type')
-				return redirect("/")
-			q = "SELECT email,points FROM users WHERE email = '{}'".format(session['user'][1])
-			result = db.select(q)
-			if len(result) == 1:
-				result = result[0]
-				points = str(int(result[1]) + int(p))
-				q = "UPDATE users SET points = '{}' WHERE email = '{}'".format(points,session['user'][1])
-				if db.insert(q):
-					flash('points added')
-					return redirect("/")
-				else:
-					flash('error in db')
-					return redirect("/")
-			elif len(result) == 0:
-				flash('invalid login')
-				return redirect("/")
-			else:
-				flash('internal error')
-				return redirect("/")
-
 			if recaptcha.verify():
 				flash('Captcha Verified')
+				values = request.form.to_dict()
+				duration = values['duration']
+				if duration == "15":
+					p = 0.5
+				if duration == "30":
+					p = 1
+				if duration == "60":
+					p = 2
+				else:
+					flash('invalid type')
+					return redirect("/")
+				q = "SELECT email,points FROM users WHERE email = '{}'".format(session['user'][1])
+				result = db.select(q)
+				if len(result) == 1:
+					result = result[0]
+					points = str(int(result[1]) + int(p))
+					q = "UPDATE users SET points = '{}' WHERE email = '{}'".format(points,session['user'][1])
+					if db.insert(q):
+						flash('points added')
+						return redirect("/")
+					else:
+						flash('error in db')
+						return redirect("/")
+				elif len(result) == 0:
+					flash('invalid login')
+					return redirect("/")
+				else:
+					flash('internal error')
+					return redirect("/")
 				return redirect('/')
 			else:
 				flash('Captcha Not Verified')
