@@ -478,7 +478,6 @@ def adviewpoast():
 				else:
 					flash('internal error')
 					return redirect("/")
-				return redirect('/')
 			else:
 				flash('Captcha Not Verified')
 				return redirect('/')
