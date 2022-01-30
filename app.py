@@ -61,11 +61,21 @@ def mailing(tomail,username,token,no):
 @app.route("/")
 @app.route("/home")
 def home():
+	q = "CREATE TABLE Users (user_id SERIAL PRIMARY KEY,email VARCHAR(255),username VARCHAR(255),salt VARCHAR(255),hashed VARCHAR(255),conform_mail VARCHAR(255),password_mail VARCHAR(255),points VARCHAR(255),created_on TIMESTAMP)"
+	if db.insert(q):
+		return "created"
+	else:
+		return "not created"
 	if not db_connection:
 		return "<h1>error in connection to db try later<h1>"	
 	if "user" in session:
 		#  D S M B
-		return render_template("index.html",user = session["user"],ab = session["user"])
+		q = "SELECT points FROM users WHERE email = '{}'".format(session["user"][1])
+		points = db.select(q)
+		points = points[0][0]
+		print("=========================")
+		print(points)
+		return render_template("index.html",user = session["user"],points = points)
 	else:
 		return redirect("/signin")
 
@@ -119,7 +129,7 @@ def signup():
 				salt,hashed = encrypt.create(values["password"])
 				token = tokens.create([email,username,salt,hashed],'email-confirm')
 				if mailing(email,username,token,1):
-					q = "INSERT INTO users (username,email,salt,hashed,conform_mail,password_mail,created_on) VALUES ('{}','{}','{}','{}','{}','#',CURRENT_TIMESTAMP)".format(username,email,salt,hashed,token)
+					q = "INSERT INTO users (username,email,salt,hashed,conform_mail,password_mail,points,created_on) VALUES ('{}','{}','{}','{}','{}','#','0',CURRENT_TIMESTAMP)".format(username,email,salt,hashed,token)
 					if db.insert(q):
 						flash('please confirm your mail')
 						return redirect("/signup")
@@ -352,12 +362,12 @@ def reset_password(token):
 def profile():
 	if request.method == 'GET':
 		if 'user' in session:
-			q = "SELECT username,email FROM users WHERE email = '{}'".format(session['user'][1])
+			q = "SELECT username,email,points FROM users WHERE email = '{}'".format(session['user'][1])
 			result = db.select(q)
 			if len(result) == 1:
 				result = result[0]
-				username,email = result[0],result[1]
-				return render_template("profile.html",username = username,email = email)
+				username,email,points = result[0],result[1],result[2]
+				return render_template("profile.html",username = username,email = email,points = points)
 			elif len(result) == 0:
 				flash('invalid login')
 				return redirect("/signin")
@@ -441,12 +451,43 @@ def adviewpoast():
 		flash('invalid request')
 		return redirect("/")
 	if request.method == 'POST':
-		if recaptcha.verify():
-			flash('Captcha Verified')
-			return redirect('/')
-		else:
-			flash('Captcha Not Verified')
-			return redirect('/')
+		if 'user' in session:
+			values = request.form.to_dict()
+			duration = values['duration']
+			if duration == "15":
+				p = 0.5
+			if duration == "30":
+				p = 1
+			if duration == "60":
+				p = 2
+			else:
+				flash('invalid type')
+				return redirect("/")
+			q = "SELECT email,points FROM users WHERE email = '{}'".format(session['user'][1])
+			result = db.select(q)
+			if len(result) == 1:
+				result = result[0]
+				points = str(int(result[1]) + int(p))
+				q = "UPDATE users SET points = '{}' WHERE email = '{}'".format(points,session['user'][1])
+				if db.insert(q):
+					flash('points added')
+					return redirect("/")
+				else:
+					flash('error in db')
+					return redirect("/")
+			elif len(result) == 0:
+				flash('invalid login')
+				return redirect("/")
+			else:
+				flash('internal error')
+				return redirect("/")
+
+			if recaptcha.verify():
+				flash('Captcha Verified')
+				return redirect('/')
+			else:
+				flash('Captcha Not Verified')
+				return redirect('/')
 # =============================================================================================================
 @app.route("/logout")
 def logout():

@@ -36,7 +36,8 @@ var ids = []
 window.onload = function () {
     var duration = document.querySelector('#duration').innerHTML;
     createProgressbar(duration, function () {
-        alert(duration + ' s progressbar is finished!');
+        document.querySelector("#adpostform").style.display = "flex";
+        // alert(duration + ' s progressbar is finished!');
     });
 
     document.querySelectorAll("li")
@@ -99,8 +100,4 @@ function clix() {
     // document.querySelectorAll(".container-1fe1cd691be6ddffcc749d27364ea449__link")[1].click()
     // document.querySelectorAll(".container-1fe1cd691be6ddffcc749d27364ea449__link")[2].click()
     // document.querySelectorAll(".container-1fe1cd691be6ddffcc749d27364ea449__link")[3].click()
-
-
-
-
 }

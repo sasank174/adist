@@ -55,6 +55,36 @@
             z-index: -1;
         }
 
+        #adpostform {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            height: 80vh;
+            background: #fff;
+            display: block;
+            background: yellow;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 99999;
+            flex-direction: column;
+            display: none;
+        }
+
+        #adpostform button {
+            font-weight: 500;
+            width: 100%;
+            color: black;
+            padding: 5px 15px;
+            margin: 8px 0;
+            cursor: pointer;
+            background: rgba(22, 160, 133, 0.25);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+
         header {
             width: 100%;
             display: flex;
@@ -170,7 +200,7 @@
 
         .a {
             position: fixed;
-            bottom: 50px;
+            bottom: 20px;
             left: 50%;
         }
     </style>
@@ -181,13 +211,18 @@
         <h1><span>A</span>dist</h1>
     </header>
     <div class="progressbar"></div>
+    <div id="adpostform">
+        <p>solve the captcha to get points</p>
+        <form action="/adview" method="post">
+            <input type="hidden" name="duration" value="{{duration}}">
+            {{ recaptcha }}
+            <button id="submitbtn" type="submit">submit</button>
+        </form>
+    </div>
     <p id="demo" style="cursor:pointer;text-align: center;user-select:none;" onclick="play();">if loader is paused <span
             style="color: blue;">click me</span></p>
+    <p id="demo" style="cursor:pointer;text-align: center;user-select:none;" onclick="play();">disable adblocker if loader has not started</p>
     <p style="display: none;" id="duration">{{ duration }}</p>
-    <form action="/adview" method="post">
-        {{ recaptcha }}
-        <button id="submitbtn" type="submit">submit</button>
-    </form>
 
     <script>
         document.getElementById("submitbtn").addEventListener("click", function (event) {
