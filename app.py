@@ -5,6 +5,9 @@ import tokens
 import encrypt
 import randad
 from flask_recaptcha import ReCaptcha
+from dotenv import load_dotenv
+load_dotenv()
+import os
 
 app = Flask(__name__)
 mail= Mail(app)
@@ -61,6 +64,7 @@ def mailing(tomail,username,token,no):
 @app.route("/")
 @app.route("/home")
 def home():
+	return "hello, {}".format(os.getenv('NAME'))
 	if not db_connection:
 		return "<h1>error in connection to db try later<h1>"	
 	if "user" in session:

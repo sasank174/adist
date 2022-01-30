@@ -15,6 +15,7 @@ Jinja2==3.0.3
 MarkupSafe==2.0.1
 psycopg2==2.9.3
 pycparser==2.21
+python-dotenv==0.19.2
 requests==2.27.1
 six==1.16.0
 unicorn==1.0.3
