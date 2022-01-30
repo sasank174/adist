@@ -184,7 +184,23 @@
     <p id="demo" style="cursor:pointer;text-align: center;user-select:none;" onclick="play();">if loader is paused <span
             style="color: blue;">click me</span></p>
     <p style="display: none;" id="duration">{{ duration }}</p>
-    <ul>
+    <form action="/adview" method="post">
+        {{ recaptcha }}
+        <button id="submitbtn" type="submit">submit</button>
+    </form>
+
+    <script>
+        document.getElementById("submitbtn").addEventListener("click", function (event) {
+            var recaptcha = document.querySelector("#g-recaptcha-response").value;
+            if (recaptcha === "") {
+                event.preventDefault()
+                alert("Please check the recaptcha");
+            }
+        });
+    </script>
+
+
+    <ul style="display: none;">
         {% for ad in randlis %}
         <li>{{ ad }}</li>
         {% endfor %}

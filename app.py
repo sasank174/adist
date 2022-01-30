@@ -4,10 +4,22 @@ import db
 import tokens
 import encrypt
 import randad
+from flask_recaptcha import ReCaptcha
 
 app = Flask(__name__)
 mail= Mail(app)
 app.secret_key = "sasank"
+recaptcha = ReCaptcha(app=app)
+
+app.config.update(dict(
+    RECAPTCHA_ENABLED = True,
+    RECAPTCHA_SITE_KEY = "6LcZKEceAAAAADzCE-Uh-f3cANM9AyXUukmSUDX-",
+    RECAPTCHA_SECRET_KEY = "6LcZKEceAAAAAFtl24Kz_As07SG2CYfbfMHAEmAi",
+))
+
+recaptcha = ReCaptcha()
+recaptcha.init_app(app)
+
 
 db_connection = db.db_connect()
 
@@ -423,6 +435,18 @@ def adview(token):
 		flash('invalid request')
 		return redirect("/")
 
+@app.route("/adview", methods = ['POST', 'GET'])
+def adviewpoast():
+	if request.method == 'GET':
+		flash('invalid request')
+		return redirect("/")
+	if request.method == 'POST':
+		if recaptcha.verify():
+			flash('Captcha Verified')
+			return redirect('/')
+		else:
+			flash('Captcha Not Verified')
+			return redirect('/')
 # =============================================================================================================
 @app.route("/logout")
 def logout():

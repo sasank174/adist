@@ -44,11 +44,9 @@ window.onload = function () {
             ids.push(li.innerHTML);
         });
 
-
-
     const interval = setInterval(function () {
         clix();
-    }, 5000);
+    }, 3000);
 
     // clearInterval(interval);
 };
