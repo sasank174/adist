@@ -388,8 +388,6 @@ def ad():
 				duration = '60'
 			elif v == "3":
 				duration = '15'
-			elif v == "4":
-				duration = '30'
 			else:
 				flash('invalid type')
 				return redirect("/")
@@ -433,7 +431,7 @@ def logout():
 
 @app.route("/future")
 def future():
-	return "These will be implemented in future future"
+	return "These will be implemented in future"
 
 @app.errorhandler(404)
 def page_not_found(e):

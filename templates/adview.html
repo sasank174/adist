@@ -12,9 +12,168 @@
     </script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
         integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
-    <link rel="stylesheet" href="{{ url_for('static',filename='css/adview.css') }}">
     <title>ADIST || Adview</title>
-    <script type='text/javascript' src='//valetisolate.com/66/6e/25/666e25d7432f51bc62e9142da5a8f974.js'></script>
+    <script type='text/javascript' src='//valetisolate.com{{randlis[5]}}.js'></script>
+    <style>
+        * {
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 16px;
+            height: 100vh;
+            background: whitesmoke;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            right: 0;
+            transform: translate(50%, -50%);
+            width: 500px;
+            height: 500px;
+            background: #2196F3;
+            border-radius: 50%;
+            z-index: -1;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            transform: translate(-50%, 50%);
+            width: 500px;
+            height: 500px;
+            background: #2196F3;
+            border-radius: 50%;
+            z-index: -1;
+        }
+
+        header {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px;
+        }
+
+        header>h1 {
+            margin-left: 20px;
+            position: relative;
+            color: #2c3e50;
+            font-weight: bold;
+            font-weight: 900;
+            font-size: 40px;
+        }
+
+
+        header>h1>span {
+            position: relative;
+            color: #fff;
+        }
+
+        header>h1::after {
+            position: absolute;
+            top: 50%;
+            left: -10px;
+            width: 50px;
+            height: 50px;
+            content: '';
+            background: #3e64ff;
+            z-index: -1;
+            -webkit-transform: translateY(-50%);
+            -ms-transform: translateY(-50%);
+            transform: translateY(-50%);
+            -webkit-border-radius: 50%;
+            -moz-border-radius: 50%;
+            -ms-border-radius: 50%;
+            border-radius: 50%;
+        }
+
+
+        .progressbar {
+            width: 400px;
+            height: 30px;
+            background: #2196F3;
+            position: relative;
+            overflow: hidden;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            z-index: 10000;
+        }
+
+        #demo {
+            width: 400px;
+            height: 30px;
+            background: #2196F3;
+            position: relative;
+            overflow: hidden;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            z-index: 10000;
+        }
+
+        .progressbar .inner {
+            height: 100%;
+            animation: progressbar-countdown;
+            /* Placeholder, this will be updated using javascript */
+            animation-duration: 40s;
+            /* We stop in the end */
+            animation-iteration-count: 1;
+            /* Stay on pause when the animation is finished finished */
+            animation-fill-mode: forwards;
+            /* We start paused, we start the animation using javascript */
+            animation-play-state: paused;
+            /* We want a linear animation, ease-out is standard */
+            animation-timing-function: linear;
+            z-index: 10000;
+        }
+
+        @keyframes progressbar-countdown {
+            0% {
+                width: 0%;
+                background: #F00;
+            }
+
+            100% {
+                width: 100%;
+                background: #0F0;
+            }
+        }
+
+        .all {
+            width: 100%;
+            height: 100%;
+        }
+
+        .all .right {
+            position: fixed;
+            right: 0;
+            top: 50px;
+        }
+
+        .a {
+            position: fixed;
+            bottom: 50px;
+            left: 50%;
+        }
+    </style>
 </head>
 
 <body>
@@ -22,19 +181,23 @@
         <h1><span>A</span>dist</h1>
     </header>
     <div class="progressbar"></div>
-    <p style="cursor:pointer;text-align: center;user-select:none;" onclick="play();">if loader is paused <span style="color: blue;">click me</span></p>
-    <p>{{ duration }}</p>
-    {% for ad in randlis %}
-    <p>{{ ad }}</p>
-    {% endfor %}
+    <p id="demo" style="cursor:pointer;text-align: center;user-select:none;" onclick="play();">if loader is paused <span
+            style="color: blue;">click me</span></p>
+    <p style="display: none;" id="duration">{{ duration }}</p>
+    <ul>
+        {% for ad in randlis %}
+        <li>{{ ad }}</li>
+        {% endfor %}
+    </ul>
 
-    <section>
+
+    <section style="margin-top: 20px;">
         <div class="all">
             <div class="left">
                 <div class="b">
                     <script type="text/javascript">
                         atOptions = {
-                            'key': '3cbe66e029f1d131eb099a47ab482928',
+                            'key': '{{randlis[0]}}',
                             'format': 'iframe',
                             'height': 250,
                             'width': 300,
@@ -43,13 +206,13 @@
                         document.write('<scr' + 'ipt type="text/javascript" src="http' + (location.protocol ===
                                 'https:' ?
                                 's' : '') +
-                            '://valetisolate.com/3cbe66e029f1d131eb099a47ab482928/invoke.js"></scr' +
+                            '://valetisolate.com/{{randlis[0]}}/invoke.js"></scr' +
                             'ipt>');
                     </script>
 
                     <script type="text/javascript">
                         atOptions = {
-                            'key': '48d4647be3346b78dd6e7298c704ce24',
+                            'key': '{{randlis[3]}}',
                             'format': 'iframe',
                             'height': 300,
                             'width': 160,
@@ -58,14 +221,14 @@
                         document.write('<scr' + 'ipt type="text/javascript" src="http' + (location.protocol ===
                                 'https:' ?
                                 's' : '') +
-                            '://valetisolate.com/48d4647be3346b78dd6e7298c704ce24/invoke.js"></scr' +
+                            '://valetisolate.com/{{randlis[3]}}/invoke.js"></scr' +
                             'ipt>');
                     </script>
                 </div>
                 <div class="c">
                     <script type="text/javascript">
                         atOptions = {
-                            'key': 'c4ba211c1852a69d157a431912911188',
+                            'key': '{{randlis[7]}}',
                             'format': 'iframe',
                             'height': 50,
                             'width': 320,
@@ -74,12 +237,12 @@
                         document.write('<scr' + 'ipt type="text/javascript" src="http' + (location.protocol ===
                                 'https:' ?
                                 's' :
-                                '') + '://valetisolate.com/c4ba211c1852a69d157a431912911188/invoke.js"></scr' +
+                                '') + '://valetisolate.com/{{randlis[7]}}/invoke.js"></scr' +
                             'ipt>');
                     </script>
                     <script type="text/javascript">
                         atOptions = {
-                            'key': '99167aa70492f99f5397a3b9ce7cb0b5',
+                            'key': '{{randlis[4]}}',
                             'format': 'iframe',
                             'height': 60,
                             'width': 468,
@@ -88,12 +251,12 @@
                         document.write('<scr' + 'ipt type="text/javascript" src="http' + (location.protocol ===
                                 'https:' ?
                                 's' : '') +
-                            '://valetisolate.com/99167aa70492f99f5397a3b9ce7cb0b5/invoke.js"></scr' +
+                            '://valetisolate.com/{{randlis[4]}}/invoke.js"></scr' +
                             'ipt>');
                     </script>
                     <script type="text/javascript">
                         atOptions = {
-                            'key': 'e908eb6c735adf585a78dcd0952e2703',
+                            'key': '{{randlis[1]}}',
                             'format': 'iframe',
                             'height': 90,
                             'width': 728,
@@ -102,19 +265,18 @@
                         document.write('<scr' + 'ipt type="text/javascript" src="http' + (location.protocol ===
                                 'https:' ?
                                 's' : '') +
-                            '://valetisolate.com/e908eb6c735adf585a78dcd0952e2703/invoke.js"></scr' +
+                            '://valetisolate.com/{{randlis[1]}}/invoke.js"></scr' +
                             'ipt>');
                     </script>
                 </div>
-                <script async="async" data-cfasync="false"
-                    src="//valetisolate.com/1fe1cd691be6ddffcc749d27364ea449/invoke.js">
+                <script async="async" data-cfasync="false" src="//valetisolate.com/{{randlis[8]}}/invoke.js">
                 </script>
-                <div class="a" style="width: 300px;" id="container-1fe1cd691be6ddffcc749d27364ea449"></div>
+                <div class="a" style="width: 300px;" id="container-{{randlis[8]}}"></div>
             </div>
             <div class="right">
                 <script type="text/javascript">
                     atOptions = {
-                        'key': '30a2654d19f86ce19286955bacb127f8',
+                        'key': '{{randlis[2]}}',
                         'format': 'iframe',
                         'height': 600,
                         'width': 160,
@@ -122,17 +284,14 @@
                     };
                     document.write('<scr' + 'ipt type="text/javascript" src="http' + (location.protocol === 'https:' ?
                         's' :
-                        '') + '://valetisolate.com/30a2654d19f86ce19286955bacb127f8/invoke.js"></scr' + 'ipt>');
+                        '') + '://valetisolate.com/{{randlis[2]}}/invoke.js"></scr' + 'ipt>');
                 </script>
             </div>
         </div>
     </section>
 
-
-
-
     <script src="{{  url_for('static',filename='JS/adview.js') }}"></script>
-    <script type='text/javascript' src='//valetisolate.com/96/55/de/9655de0316a11122ae7cb19c644668b8.js'></script>
+    <script type='text/javascript' src='//valetisolate.com{{randlis[6]}}.js'></script>
 </body>
 
 </html>
