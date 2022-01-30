@@ -41,7 +41,7 @@ def mailing(tomail,username,token,no):
 		msg = Message('Hello', sender = 'manamwhy@gmail.com', recipients = [tomail])
 		msg.body = "<h1>Hello Flask message sent from Flask-Mail</h1>"
 		msg.subject = x
-		link = "http://127.0.0.1:8000/{}/{}".format(y,token)
+		link = "https://adist.herokuapp.com/{}/{}".format(y,token)
 		msg.html = "<div><h1>change password</h1><h1><a href='"+link+"'}>click me</a></h1></div>"
 		msg.html = '''<div
 		style="text-align:center;max-width:600px;background:rgba( 255, 255, 255, 0.25 );box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );backdrop-filter: blur( 4px );border-radius: 10px;border: 1px solid rgba( 255, 255, 255, 0.18 );">
@@ -409,7 +409,7 @@ def ad():
 				flash('invalid type')
 				return redirect("/")
 			token = tokens.adcreate([duration,session['user'][1]])
-			return "http://127.0.0.1:8000/adview/{}".format(token)
+			return "https://adist.herokuapp.com/adview/{}".format(token)
 		else:
 			flash('please login first')
 			return redirect("/signin")
