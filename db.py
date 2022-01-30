@@ -5,10 +5,10 @@ conn = None
 def db_connect():
     global conn
     conn = psycopg2.connect(
-        host = "ec2-54-157-16-125.compute-1.amazonaws.com",
-        user = "znwahnrdcbtjjb",
-        password = "a3b7b147ad6cbc9a3b07b51f02b9c96ca4d510607202f242706f54b255d58b2a",
-        database = "d9mvoqrjshij7o"
+        host = "ec2-54-208-139-247.compute-1.amazonaws.com",
+        user = "tybhmztluykmru",
+        password = "5c29670d25e170a51daa4c166c0bc96b7ceb17394141c9a3f2a5b733af64a2af",
+        database = "d5jnruoa8i21tc"
     )
     conn.autocommit = True
     return True
