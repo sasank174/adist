@@ -35,6 +35,11 @@ var ids = []
 
 window.onload = function () {
     var duration = document.querySelector('#duration').innerHTML;
+    var iframes = document.getElementsByTagName('iframe');
+    if (iframes.length <= 2) {
+        alert("your browser is blocking ads. please disable adblocker and refresh the page or try another browser");
+        window.location.href = '/';
+    }
     createProgressbar(duration, function () {
         document.querySelector("#adpostform").style.display = "flex";
         // alert(duration + ' s progressbar is finished!');
