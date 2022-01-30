@@ -68,8 +68,6 @@ def home():
 		q = "SELECT points FROM users WHERE email = '{}'".format(session["user"][1])
 		points = db.select(q)
 		points = points[0][0]
-		print("=========================")
-		print(points)
 		return render_template("index.html",user = session["user"],points = points)
 	else:
 		return redirect("/signin")
@@ -456,9 +454,9 @@ def adviewpoast():
 				flash(type(duration))
 				if duration == "15":
 					p = 0.5
-				if duration == "30":
+				elif duration == "30":
 					p = 1
-				if duration == "60":
+				elif duration == "60":
 					p = 2
 				else:
 					flash('invalid type')
