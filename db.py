@@ -1,14 +1,17 @@
 import psycopg2
+from dotenv import load_dotenv
+load_dotenv()
+import os
 
 conn = None
 
 def db_connect():
     global conn
     conn = psycopg2.connect(
-        host = "ec2-54-208-139-247.compute-1.amazonaws.com",
-        user = "tybhmztluykmru",
-        password = "5c29670d25e170a51daa4c166c0bc96b7ceb17394141c9a3f2a5b733af64a2af",
-        database = "d5jnruoa8i21tc"
+        host = os.getenv("DB_HOST"),
+        user = os.getenv("DB_USER"),
+        password = os.getenv("DB_PASSWORD"),
+        database = os.getenv("DB_NAME")
     )
     conn.autocommit = True
     return True

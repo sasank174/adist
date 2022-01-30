@@ -1,7 +1,9 @@
 from itsdangerous import URLSafeTimedSerializer, SignatureExpired,BadTimeSignature
+from dotenv import load_dotenv
+load_dotenv()
+import os
 
-s = URLSafeTimedSerializer('Thisisasecret!')
-
+s = URLSafeTimedSerializer(os.getenv("SSECRET_KEY"))
 
 def create(inp,salt):
     token = s.dumps(inp, salt=salt)

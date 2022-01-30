@@ -123,7 +123,7 @@ def signup():
 			result = db.select("SELECT username FROM users WHERE username = '{}'".format(username))
 			if len(result) == 0:
 				salt,hashed = encrypt.create(values["password"])
-				token = tokens.create([email,username,salt,hashed],'email-confirm')
+				token = tokens.create([email,username,salt,hashed],os.getenv('EMAIL_CONFIRMATION_TOKEN'))
 				if mailing(email,username,token,1):
 					q = "INSERT INTO users (username,email,salt,hashed,conform_mail,password_mail,points,created_on) VALUES ('{}','{}','{}','{}','{}','#','0',CURRENT_TIMESTAMP)".format(username,email,salt,hashed,token)
 					if db.insert(q):
@@ -152,7 +152,7 @@ def signup():
 
 @app.route('/confirm_email/<token>')
 def confirm_email(token):
-	res = tokens.check(token,'email-confirm')
+	res = tokens.check(token,os.getenv('EMAIL_CONFIRMATION_TOKEN'))
 	if res == "invalid":
 		return "invalid url"
 	if res[-1] == "valid":
@@ -214,12 +214,12 @@ def send_again():
 		token = values["token"]
 
 		if confirm == "confirm":
-			res = tokens.get(token,'email-confirm')
+			res = tokens.get(token,os.getenv('EMAIL_CONFIRMATION_TOKEN'))
 			if res == "invalid":
 				return "invalid url"
 			else:
 				email,username = res[0],res[1]
-				token = tokens.create(res,'email-confirm')
+				token = tokens.create(res,os.getenv('EMAIL_CONFIRMATION_TOKEN'))
 				if mailing(email,username,token,1):
 					q = "UPDATE users SET conform_mail = '{}' WHERE username = '{}'".format(token,username)
 					if db.insert(q):
@@ -232,12 +232,12 @@ def send_again():
 					flash('error in sending mail')
 					return redirect("/signup")
 		elif confirm == "password":
-			res = tokens.get(token,'password-reset')
+			res = tokens.get(token,os.getenv('PASSWORD_CONFIRMATION_TOKEN'))
 			if res == "invalid":
 				return "invalid url"
 			else:
 				email,username = res[0],res[1]
-				token = tokens.create(res,'password-reset')
+				token = tokens.create(res,os.getenv('PASSWORD_CONFIRMATION_TOKEN'))
 				if mailing(email,username,token,2):
 					q = "UPDATE users SET password_mail = '{}' WHERE username = '{}'".format(token,username)
 					if db.insert(q):
@@ -275,7 +275,7 @@ def password_change():
 					return redirect("/passwordchange")
 				else:
 					salt,hashed = encrypt.create(password)
-					token = tokens.create([email,username,salt,hashed],'password-reset')
+					token = tokens.create([email,username,salt,hashed],os.getenv('PASSWORD_CONFIRMATION_TOKEN'))
 					if mailing(email,username,token,2):
 						q = "UPDATE users SET password_mail = '{}' WHERE username = '{}'".format(token,username)
 						if db.insert(q):
@@ -301,7 +301,7 @@ def password_change():
 
 @app.route('/reset_password/<token>')
 def reset_password(token):
-	res = tokens.check(token,'password-reset')
+	res = tokens.check(token,os.getenv('PASSWORD_CONFIRMATION_TOKEN'))
 	if res == "invalid":
 		return "invalid url"
 	if res[-1] == "valid":
