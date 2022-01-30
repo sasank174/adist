@@ -71,6 +71,14 @@
             z-index: 99999;
             flex-direction: column;
             display: none;
+
+
+
+
+            background: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
         }
 
         #adpostform button {
@@ -221,7 +229,8 @@
     </div>
     <p id="demo" style="cursor:pointer;text-align: center;user-select:none;" onclick="play();">if loader is paused <span
             style="color: blue;">click me</span></p>
-    <p id="demo" style="cursor:pointer;text-align: center;user-select:none;" onclick="play();">disable adblocker if loader has not started</p>
+    <p id="demo" style="cursor:pointer;text-align: center;user-select:none;" onclick="play();">disable adblocker if
+        loader has not started</p>
     <p style="display: none;" id="duration">{{ duration }}</p>
 
     <script>

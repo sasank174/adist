@@ -61,11 +61,6 @@ def mailing(tomail,username,token,no):
 @app.route("/")
 @app.route("/home")
 def home():
-	q = "CREATE TABLE Users (user_id SERIAL PRIMARY KEY,email VARCHAR(255),username VARCHAR(255),salt VARCHAR(255),hashed VARCHAR(255),conform_mail VARCHAR(255),password_mail VARCHAR(255),points VARCHAR(255),created_on TIMESTAMP)"
-	if db.insert(q):
-		return "created"
-	else:
-		return "not created"
 	if not db_connection:
 		return "<h1>error in connection to db try later<h1>"	
 	if "user" in session:

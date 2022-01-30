@@ -1,8 +1,8 @@
-
-	cursor = conn.cursor()
-	cursor.execute("CREATE TABLE Users(user_id SERIAL PRIMARY KEY,email VARCHAR(255),username VARCHAR(255),salt VARCHAR(255),hashed VARCHAR(255),conform_mail VARCHAR(255),password_mail VARCHAR(255),created_on TIMESTAMP)")
-	conn.commit()
-	cursor.close()
+q = "CREATE TABLE Users (user_id SERIAL PRIMARY KEY,email VARCHAR(255),username VARCHAR(255),salt VARCHAR(255),hashed VARCHAR(255),conform_mail VARCHAR(255),password_mail VARCHAR(255),points VARCHAR(255),created_on TIMESTAMP)"
+	if db.insert(q):
+		return "created"
+	else:
+		return "not created"
 
 
 	cursor = conn.cursor()
