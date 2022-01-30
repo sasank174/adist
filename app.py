@@ -13,8 +13,8 @@ recaptcha = ReCaptcha(app=app)
 
 app.config.update(dict(
     RECAPTCHA_ENABLED = True,
-    RECAPTCHA_SITE_KEY = "6LcZKEceAAAAADzCE-Uh-f3cANM9AyXUukmSUDX-",
-    RECAPTCHA_SECRET_KEY = "6LcZKEceAAAAAFtl24Kz_As07SG2CYfbfMHAEmAi",
+    RECAPTCHA_SITE_KEY = "6Ld2lkceAAAAANmiOuXdRol2ha7Dj1pNgKUPcRI8",
+    RECAPTCHA_SECRET_KEY = "6Ld2lkceAAAAALyPvDB7jVWcz19bsILukMC_1iEd",
 ))
 
 recaptcha = ReCaptcha()
