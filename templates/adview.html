@@ -22,7 +22,11 @@
         <h1><span>A</span>dist</h1>
     </header>
     <div class="progressbar"></div>
-    <p style="cursor:pointer;user-select:none" onclick="play();">if loader is paused <span>click me</span></p>
+    <p style="cursor:pointer;text-align: center;user-select:none;" onclick="play();">if loader is paused <span style="color: blue;">click me</span></p>
+    <p>{{ duration }}</p>
+    {% for ad in randlis %}
+    <p>{{ ad }}</p>
+    {% endfor %}
 
     <section>
         <div class="all">

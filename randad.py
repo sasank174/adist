@@ -122,3 +122,12 @@ l6 = ["d0e7eb24653eb69727dfe4648f80a3e0","d350bcb501ed925e8308d6867141f76a","ff3
 
 
 l7 = ["4efd8a89f14cba6ce97db75bedccaf85","da5124a2b905a2e4138bdc2dc4c2d90f","150e56955e5a639a65bf8d4570d8e28d","c82e904250e12ab84e2f0e0a33197018","fc3ef974dbb04784c12e9140bb0e4b22","/4d/0d/ee/4d0deec603a214a4a489d74a827317b9","/7d/af/47/7daf4779cadb065c48b367828bfd81b9","1fca557baed23000b5794a24e27787a7","b1948643c7171ba1658f66d5e491240b"]
+
+
+
+
+import random
+
+def randomlist():
+	ra = [l1,l2,l3,l4,l5,l6,l7]
+	return random.choice(ra)

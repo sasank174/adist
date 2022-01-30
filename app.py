@@ -3,6 +3,7 @@ from flask_mail import Mail, Message
 import db
 import tokens
 import encrypt
+import randad
 
 app = Flask(__name__)
 mail= Mail(app)
@@ -412,9 +413,8 @@ def adview(token):
 			result = db.select(q)
 			if len(result) == 1:
 				result = result[0]
-				print(duration)
-				print(type(duration))
-				return render_template("adview.html",duration = duration)
+				randlis = randad.randomlist()
+				return render_template("adview.html",duration = duration,randlis = randlis)
 			elif len(result) == 0:
 				flash('invalid login')
 				return redirect("/")
